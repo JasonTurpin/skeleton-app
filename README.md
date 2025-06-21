@@ -27,7 +27,12 @@ docker run --rm \
 
 `./vendor/bin/sail artisan key:generate`
 
-`./vendor/bin/sail artisan migrate`
+### Run Migrations / Seeder
+You have two options.  For the default seeder with real recipe data, run:
+`./vendor/bin/sail artisan migrate:fresh --seed`
+
+For a larger data set with fake data, run:
+`./vendor/bin/sail artisan migrate:fresh --seed --seeder=Database\\Seeders\\LargeRecipeSeeder`
 
 ### Kickstart the nuxt frontend
 `./vendor/bin/sail npm install --prefix frontend`
@@ -40,7 +45,6 @@ visit the frontend http://localhost:3000
 
 visit the backend http://localhost:8888
 
-
 ### Connecting to your database from localhost
 `docker exec -it laravel-mysql-1 bash -c "mysql -uroot -ppassword"`
 
@@ -52,3 +56,7 @@ Or use any database GUI and connect to 127.0.0.1 port 3333
 
 Sometimes it's necessary to restart the nuxt app when adding new routes. Simply `ctrl+c` on the npm command execute
 `./vendor/bin/sail npm run dev --prefix frontend` again
+
+# Feature testing
+To run the feature tests, you can use the following command:
+`./vendor/bin/sail artisan test`
